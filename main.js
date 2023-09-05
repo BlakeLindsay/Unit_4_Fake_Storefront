@@ -128,7 +128,17 @@ const displayCards = (data) => {
 };
 
 const submitToCart = (item) => {
-	cart.push(item);
+	let i = cart.findIndex(element => {
+		console.log(element.id, item.id);
+		return element.id === item.id;
+	});
+	console.log(i);
+	if(i === -1) {
+		cart.push(item);
+	} else {
+		cart[i].quantity++;
+	}
+	console.log(cart);
 };
 
 // event listener assigned to onload - returns all products in ascending order
