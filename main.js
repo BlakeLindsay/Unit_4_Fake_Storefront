@@ -5,8 +5,14 @@ const womenClothing = document.getElementById("Women's Clothing");
 const display = document.getElementById('display');
 const API = "https://fakestoreapi.com/";
 
-async function fakeStore(endpoint) {
+const fakeStore = async (endpoint) => {
 	let result = await fetch(API + endpoint);
+	console.log(result);
 	let data = await result.json();
+	console.log(data);
 	return data;
 };
+
+console.log(fakeStore("products/category/jewelery"));
+
+window.onload = function() {console.log(fakeStore("products"))}
