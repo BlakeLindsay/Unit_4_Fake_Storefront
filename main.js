@@ -129,10 +129,8 @@ const displayCards = (data) => {
 
 const submitToCart = (item) => {
 	let i = cart.findIndex(element => {
-		console.log(element.id, item.id);
 		return element.id === item.id;
 	});
-	console.log(i);
 	if(i === -1) {
 		cart.push(item);
 	} else {
