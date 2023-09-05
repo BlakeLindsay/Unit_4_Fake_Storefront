@@ -10,6 +10,9 @@ const display = document.getElementById('display');
 // global reference to the API that will be used
 const API = "https://fakestoreapi.com/";
 
+// global reference to the cart
+const cart = [];
+
 // the four categories in the navbar are assigned their event listeners
 electronics.onclick = function() {
 	console.log(fakeStore("products/category/electronics"))
@@ -43,6 +46,7 @@ const displayCards = (data) => {
 	// add the element
 	display.innerHTML = '';
 	let cards = [];
+	// creates the elements of the cards
 	data.forEach(product => {
 		cards.push({
 			product: product,
@@ -64,7 +68,7 @@ const displayCards = (data) => {
 		});
 	});
 	
-	// creates and appends the parts of the cards
+	// edits and appends the parts of the cards
 	cards.forEach(card => {
 		card.body.className = 'card';
 		card.body.style = 'width: 18rem;';
@@ -88,8 +92,18 @@ const displayCards = (data) => {
 		card.priceButton.innerText = 'Price';
 		card.priceCollapse.className = 'accordion-collapse collapse show';
 		card.priceBody.className = 'accordion-body';
-		card.priceBody.innerText = `${card.product.price}`;
+		card.priceBody.innerText = `$${card.product.price}`;
+
 		card.addButton.innerText = 'Add to Cart';
+		card.addButton.onclick = () => {
+			let item = {
+				id: card.product.id,
+				title: card.product.title,
+				cost: card.product.price,
+				quantity: 1
+			}
+			submitToCart(item);
+		};
 
 		card.body.append(card.image);
 		card.body.append(card.title);
@@ -105,11 +119,17 @@ const displayCards = (data) => {
 		card.priceHeader.append(card.priceButton);
 		card.accordion.append(card.priceCollapse);
 		card.priceCollapse.append(card.priceBody);
+
 		card.body.append(card.addButton);
+
 		display.append(card.body);
 	});
 	console.log(cards);
-}
+};
+
+const submitToCart = (item) => {
+	cart.push(item);
+};
 
 // event listener assigned to onload - returns all products in ascending order
 window.onload = function() {
