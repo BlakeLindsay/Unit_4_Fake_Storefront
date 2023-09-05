@@ -31,7 +31,16 @@ womenClothing.onclick = function() {
 const fakeStore = async (endpoint) => {
 	let result = await fetch(API + endpoint);
 	let data = await result.json();
+	displayCards(data);
 	return data;
+};
+
+// displays the products returned as cards
+const displayCards = (data) => {
+	console.log("displayed cards");
+	// create the element
+	// change the element
+	// add the element
 };
 
 // event listener assigned to onload - returns all products in ascending order
