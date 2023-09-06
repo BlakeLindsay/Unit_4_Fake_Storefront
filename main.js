@@ -3,6 +3,8 @@ const electronics = document.getElementById('Electronics');
 const jewelry = document.getElementById('Jewelry');
 const menClothing = document.getElementById("Men's Clothing");
 const womenClothing = document.getElementById("Women's Clothing");
+const cardBase = document.getElementById('cardBase');
+const title = document.getElementsByClassName('card-title');
 
 // global reference to the display
 const display = document.getElementById('display');
@@ -19,7 +21,7 @@ electronics.onclick = function() {
 };
 
 jewelry.onclick = function() {
-	console.log(fakeStore("products/category/jewelry"))
+	console.log(fakeStore("products/category/jewelery"))
 };
 
 menClothing.onclick = function() {
@@ -66,10 +68,14 @@ const displayCards = (data) => {
 			priceBody: document.createElement('div'),
 			addButton: document.createElement('button')
 		});
+		// let newCard = document.createElement('div');
+		// newCard.className = 'card';
+		// newCard.style = 'width: 18rem;';
+		// newCard.innerHTML = title.innerHTML;
 	});
 	
 	// edits and appends the parts of the cards
-	cards.forEach(card => {
+	cards.forEach((card, index) => {
 		card.body.className = 'card';
 		card.body.style = 'width: 18rem;';
 		card.image.className = 'card-img-top';
@@ -77,20 +83,38 @@ const displayCards = (data) => {
 		card.image.alt = `${card.product.title}`;
 		card.title.innerText = `${card.product.title}`;
 		card.title.className = 'card-title';
-		card.accordion.className = 'accordion';
+		card.accordion.className = 'accordion close';
+		card.accordion.id = 'accordionExample';
 		card.descriptionItem.className = 'accordion-item';
 		card.descriptionHeader.className = 'accordion-header';
+		card.descriptionHeader.id = `heading${index}`;
 		card.descriptionButton.className = 'accordion-button';
 		card.descriptionButton.innerText = 'Description';
-		card.descriptionButton.data
+		card.descriptionButton.type = 'button';
+		card.descriptionButton.setAttribute('data-bs-toggle', 'collapse');
+		card.descriptionButton.setAttribute('data-bs-target', `#collapse${index}`);
+		card.descriptionButton.setAttribute('aria-expanded', 'false');
+		card.descriptionButton.setAttribute('aria-controls', `collapse${index}`);
 		card.descriptionCollapse.className = 'accordion-collapse collapse show';
+		card.descriptionCollapse.id = `collapse${index}`;
+		card.descriptionCollapse.setAttribute('aria-labelledby', `heading${index}`);
+		card.descriptionCollapse.setAttribute('data-bs-parent', '#accordonExample');
 		card.descriptionBody.className = 'accordion-body';
 		card.descriptionBody.innerText = `${card.product.description}`;
 		card.priceItem.className = 'accordion-item';
 		card.priceHeader.className = 'accordion-header';
+		card.priceHeader.id = `heading${index}2`;
 		card.priceButton.className = 'accordion-button';
 		card.priceButton.innerText = 'Price';
+		card.priceButton.type = 'button';
+		card.priceButton.setAttribute('data-bs-toggle', 'collapse');
+		card.priceButton.setAttribute('data-bs-target', `#collapse${index}2`);
+		card.priceButton.setAttribute('aria-expanded', 'false');
+		card.priceButton.setAttribute('aria-controls', `collapse${index}2`);
 		card.priceCollapse.className = 'accordion-collapse collapse show';
+		card.priceCollapse.id = `collapse${index}2`;
+		card.priceCollapse.setAttribute('aria-labelledby', `heading${index}2`);
+		card.priceCollapse.setAttribute('data-bs-parent', 'accordionExample');
 		card.priceBody.className = 'accordion-body';
 		card.priceBody.innerText = `$${card.product.price}`;
 
