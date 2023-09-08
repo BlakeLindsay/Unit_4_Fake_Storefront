@@ -76,17 +76,17 @@ const displayCards = (data) => {
 	
 	// edits and appends the parts of the cards
 	cards.forEach((card, index) => {
-		card.body.className = 'card';
+		card.body.className = 'card w-25 h-50';
 		card.body.style = 'width: 18rem;';
-		card.image.className = 'card-img-top';
+		card.image.className = 'card-img-top w-25 h-25 align-self-center';
 		card.image.src = `${card.product.image}`;
 		card.image.alt = `${card.product.title}`;
 		card.title.innerText = `${card.product.title}`;
 		card.title.className = 'card-title';
-		card.accordion.className = 'accordion close';
+		card.accordion.className = 'accordion';
 		card.accordion.id = 'accordionExample';
 		card.descriptionItem.className = 'accordion-item';
-		card.descriptionHeader.className = 'accordion-header';
+		card.descriptionHeader.className = 'accordion-header ';
 		card.descriptionHeader.id = `heading${index}`;
 		card.descriptionButton.className = 'accordion-button';
 		card.descriptionButton.innerText = 'Description';
@@ -95,7 +95,7 @@ const displayCards = (data) => {
 		card.descriptionButton.setAttribute('data-bs-target', `#collapse${index}`);
 		card.descriptionButton.setAttribute('aria-expanded', 'false');
 		card.descriptionButton.setAttribute('aria-controls', `collapse${index}`);
-		card.descriptionCollapse.className = 'accordion-collapse collapse show';
+		card.descriptionCollapse.className = 'accordion-collapse collapse';
 		card.descriptionCollapse.id = `collapse${index}`;
 		card.descriptionCollapse.setAttribute('aria-labelledby', `heading${index}`);
 		card.descriptionCollapse.setAttribute('data-bs-parent', '#accordonExample');
@@ -111,7 +111,7 @@ const displayCards = (data) => {
 		card.priceButton.setAttribute('data-bs-target', `#collapse${index}2`);
 		card.priceButton.setAttribute('aria-expanded', 'false');
 		card.priceButton.setAttribute('aria-controls', `collapse${index}2`);
-		card.priceCollapse.className = 'accordion-collapse collapse show';
+		card.priceCollapse.className = 'accordion-collapse collapse';
 		card.priceCollapse.id = `collapse${index}2`;
 		card.priceCollapse.setAttribute('aria-labelledby', `heading${index}2`);
 		card.priceCollapse.setAttribute('data-bs-parent', 'accordionExample');
@@ -165,5 +165,5 @@ const submitToCart = (item) => {
 
 // event listener assigned to onload - returns all products in ascending order
 window.onload = function() {
-	console.log(fakeStore("products?sort=asc"))
+	console.log(fakeStore("products?sort=asc"));
 };
