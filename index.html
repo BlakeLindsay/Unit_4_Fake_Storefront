@@ -10,7 +10,7 @@
 <body class="d-flex justify-content-center flex-column overflow-x-hidden">
 	<nav class="navbar sticky-top bg-black w-100">
 		<div>The Store</div>
-		<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Cart</button>
+		<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" onclick="displayCart()">Cart</button>
 		<div id="Electronics">Electronics</div>
 		<div id="Jewelry">Jewelery</div>
 		<div id="Men's Clothing">Men's Clothing</div>
@@ -61,7 +61,10 @@
 							</tr>
 						</table>
 					</div>
-					<div class="modal-footer">Footer</div>
+					<div class="modal-footer">
+						<button onclick="clearCart()">Clear Cart</button>
+						<button id="purchaseButton" onclick="purchase()"></button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -5,6 +5,13 @@ const menClothing = document.getElementById("Men's Clothing");
 const womenClothing = document.getElementById("Women's Clothing");
 const cardBase = document.getElementById('cardBase');
 const title = document.getElementsByClassName('card-title');
+const itemListBody = document.getElementById('itemListBody');
+const subtotal = document.getElementById('subtotal');
+const tax = document.getElementById('tax');
+const shipping = document.getElementById('shipping');
+const total = document.getElementById('total');
+const purchaseButton = document.getElementById('purchaseButton');
+
 
 // global reference to the display
 const display = document.getElementById('display');
@@ -161,6 +168,57 @@ const submitToCart = (item) => {
 		cart[i].quantity++;
 	}
 	console.log(cart);
+};
+
+const displayCart = () => {
+	let subtotalValue = 0;
+	itemListBody.innerHTML = '';
+
+	if (cart.length == 0) {
+		itemListBody.append(newItemRow(0, '', 0));
+		return;
+	}
+	
+	cart.forEach((item) => {
+		itemListBody.append(newItemRow(item.quantity, item.title, item.cost));
+		subtotalValue += item.cost * item.quantity;
+	});
+	
+	let taxValue = subtotalValue * 0.07;
+	let shippingValue = subtotalValue * 0.1;
+	let totalValue = subtotalValue + taxValue + shippingValue;
+
+	subtotal.innerText = `$${subtotalValue.toFixed(2)}`;
+	tax.innerText = `$${taxValue.toFixed(2)}`;
+	shipping.innerText = `$${shippingValue.toFixed(2)}`;
+	total.innerText = `$${totalValue.toFixed(2)}`;
+	purchaseButton.innerText = `Purchase for $${totalValue.toFixed(2)}`;
+};
+
+function newItemRow(quantity, item, price) {
+	let newRow = document.createElement('tr');
+	let rowQuantity = document.createElement('td');
+	rowQuantity.innerText = quantity;
+	let rowItem = document.createElement('td');
+	rowItem.innerText = item + ` at $${price} each`;
+	let rowPrice = document.createElement('td');
+	let total = price * quantity;
+	rowPrice.innerText = `$${total.toFixed(2)}`;
+
+	newRow.append(rowQuantity);
+	newRow.append(rowItem);
+	newRow.append(rowPrice);
+
+	return newRow;
+};
+
+function clearCart() {
+	cart.length = 0;
+	displayCart();
+};
+
+function purchase() {
+	alert('Thank you for your Purchase!');
 };
 
 // event listener assigned to onload - returns all products in ascending order
